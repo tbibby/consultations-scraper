@@ -43,7 +43,8 @@ def description_escaped_html(status, start_date, closing_date, title, descriptio
     return html.escape(html_description)
 
 # URL of the website
-url = 'https://consultations.tipperarycoco.ie/consultations'
+base_url = 'https://consultations.tipperarycoco.ie/'
+url = base_url + 'consultations'
 author = 'Tipperary County Council'
 
 # Send a GET request
@@ -67,7 +68,7 @@ for row in rows:
     if title_element and date_element:
         item = {
             'title': title_element.get_text(),
-            'link': url + title_element['href'],
+            'link': base_url + title_element['href'],
             'pubDate': datetime.fromisoformat(date_element['datetime']).strftime('%a, %d %b %Y %H:%M:%S %z'),
             'description': description_escaped_html(status='Open', start_date=start_date, closing_date=closing_date, title=title_element.get_text(), description=description),
         }
