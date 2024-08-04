@@ -7,7 +7,7 @@ import pytz
 
 def description_escaped_html(status, start_date, closing_date, title, description):
     attr_date_format = '%Y-%m-%dT%H:%M:%S%z'
-    desc_date_format = '%-d.%m.%Y - %-I:%M%P' #%P is undocumented and, confusingly, lowercase
+    desc_date_format = '%-d.%m.%Y - %I:%M%P' #%P is undocumented and, confusingly, lowercase
     start_date_attr = start_date.strftime(attr_date_format)
     start_date_desc = start_date.strftime(desc_date_format)
     closing_date_attr = closing_date.strftime(attr_date_format)
