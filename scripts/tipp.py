@@ -1,6 +1,46 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import html
+from dateutil import parser
+
+def description_escaped_html(status, start_date, closing_date, title, description):
+    attr_date_format = '%Y-%m-%dT%H:%M:%S%z'
+    desc_date_format = '%-d.%m.%Y - %I:%M%P' #%P is undocumented and, confusingly, lowercase
+    start_date_attr = start_date.strftime(attr_date_format)
+    start_date_desc = start_date.strftime(desc_date_format)
+    closing_date_attr = closing_date.strftime(attr_date_format)
+    closing_date_desc = closing_date.strftime(desc_date_format)
+
+    html_description = f"""
+    <div class="status">
+        <span class="label">Status:</span> 
+        <span class="value">{status}</span>
+    </div>
+    <div class="period">
+        <span class="label">Open Period:</span>
+        <span class="value">
+                <span  class="date-display-range">
+                        <span  property="dc:date" datatype="xsd:dateTime" content="{start_date_attr}" class="date-display-start">
+                                {start_date_desc}
+                        </span>
+                        to
+                        <span  property="dc:date" datatype="xsd:dateTime" content="{closing_date_attr}" class="date-display-end">
+                                {closing_date_desc}
+                        </span>
+                </span>
+        </span>
+    </div>
+    <div class="summary">
+        <p>
+                {title}
+        </p>
+        <p>
+                {description}
+        </p>
+    </div>
+    """
+    return html.escape(html_description)
 
 # URL of the website
 url = 'https://consultations.tipperarycoco.ie/consultations'
@@ -16,12 +56,20 @@ items = []
 for row in rows:
     title_element = row.select_one('.consult-title a')
     date_element = row.select_one('.consult-day time')
-    
+    closing_element = row.select_one('.consult-closing-date time')
+    desc_element = row.select_one('.consult-body')
+    #OF COURSE the closing date is in a different format. Python doesn't like the Z
+    closing_date = parser.parse(closing_element['datetime'])
+    start_date = datetime.fromisoformat(date_element['datetime'])
+    title = title_element.get_text()
+    #ok to have html in the description
+    description = desc_element.encode_contents()
     if title_element and date_element:
         item = {
             'title': title_element.get_text(),
             'link': url + title_element['href'],
             'pubDate': datetime.fromisoformat(date_element['datetime']).strftime('%a, %d %b %Y %H:%M:%S %z'),
+            'description': description_escaped_html(status='Open', start_date=start_date, closing_date=closing_date, title=title_element.get_text(), description=description),
         }
         items.append(item)
 
@@ -37,6 +85,7 @@ def create_rss_feed(items):
             <pubDate>{item['pubDate']}</pubDate>
             <author>{author}</author>
             <guid isPermaLink="true">{guid}</guid>
+            <description>{item['description']}</description>
         </item>
         """
 
