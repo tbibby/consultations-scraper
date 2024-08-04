@@ -56,5 +56,5 @@ def create_rss_feed(items):
 rss_feed = create_rss_feed(items)
 
 # Save to a file
-with open('/home/tbibbyie/projects.bibby.ie/consultations-scraper/rss/tipperary.rss.xml', 'w+') as file:
+with open('../rss/tipperary.rss.xml', 'w+') as file:
     file.write(rss_feed)
