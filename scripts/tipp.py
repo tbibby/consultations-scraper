@@ -43,8 +43,8 @@ def description_escaped_html(status, start_date, closing_date, title, descriptio
     return html.escape(html_description)
 
 # URL of the website
-base_url = 'https://consultations.tipperarycoco.ie/'
-url = base_url + 'consultations'
+base_url = 'https://consultations.tipperarycoco.ie'
+url = base_url + '/consultations'
 author = 'Tipperary County Council'
 
 # Send a GET request
