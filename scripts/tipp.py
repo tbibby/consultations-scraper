@@ -3,10 +3,11 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import html
 from dateutil import parser
+import pytz
 
 def description_escaped_html(status, start_date, closing_date, title, description):
     attr_date_format = '%Y-%m-%dT%H:%M:%S%z'
-    desc_date_format = '%-d.%m.%Y - %I:%M%P' #%P is undocumented and, confusingly, lowercase
+    desc_date_format = '%-d.%m.%Y - %-I:%M%P' #%P is undocumented and, confusingly, lowercase
     start_date_attr = start_date.strftime(attr_date_format)
     start_date_desc = start_date.strftime(desc_date_format)
     closing_date_attr = closing_date.strftime(attr_date_format)
@@ -60,8 +61,8 @@ for row in rows:
     closing_element = row.select_one('.consult-closing-date time')
     desc_element = row.select_one('.consult-body')
     #OF COURSE the closing date is in a different format. Python doesn't like the Z
-    closing_date = parser.parse(closing_element['datetime'])
-    start_date = datetime.fromisoformat(date_element['datetime'])
+    closing_date = parser.parse(closing_element['datetime']).astimezone(pytz.timezone('Europe/Dublin'))
+    start_date = datetime.fromisoformat(date_element['datetime']).astimezone(pytz.timezone('Europe/Dublin'))
     title = title_element.get_text()
     #ok to have html in the description
     description = desc_element.select_one('p').find(string=True, recursive=False) #don't get link text in a tag
