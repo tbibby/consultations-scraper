@@ -63,7 +63,7 @@ for row in rows:
     start_date = datetime.fromisoformat(date_element['datetime'])
     title = title_element.get_text()
     #ok to have html in the description
-    description = desc_element.encode_contents()
+    description = desc_element.select_one('p').find(string=True, recursive=False) #don't get link text in a tag
     if title_element and date_element:
         item = {
             'title': title_element.get_text(),
