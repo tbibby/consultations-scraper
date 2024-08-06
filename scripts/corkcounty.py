@@ -61,8 +61,8 @@ for item in items:
             'description': description_html
         }
         unescaped_html = html.unescape(description_html)
-        print(unescaped_html)
-        print("-------------")
+        #print(unescaped_html)
+        #print("-------------")
         full_items.append(full_item)
 
     else:
