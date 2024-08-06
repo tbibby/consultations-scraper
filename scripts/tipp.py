@@ -16,6 +16,8 @@ def description_escaped_html(status, start_date, closing_date, title, descriptio
     start_date_desc = start_date.strftime(desc_date_format)
     closing_date_attr = closing_date.strftime(attr_date_format)
     closing_date_desc = closing_date.strftime(desc_date_format)
+    #title is text, so replace ampersand where necessary
+    title = title.replace('&','&amp;')
 
     html_description = f"""
     <div class="status">
