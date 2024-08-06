@@ -60,7 +60,6 @@ for item in items:
     else:
         # idk I guess skip it and print an error?
         print(f"**********DID NOT GET A HIT FOR {item['link']}*********")
-    print("-------------------------------------------")
 
 
 # Function to create RSS feed
