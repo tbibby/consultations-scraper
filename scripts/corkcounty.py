@@ -53,7 +53,7 @@ for item in items:
         content_text = content.get_text()
         #extract dates
         (earliest, latest) = analyse_text_for_earliest_and_last_date(content_text)
-        description_html = description_escaped_html("Open", earliest, latest, item['title'], content_text)
+        description_html = description_escaped_html("Open", earliest, latest, item['title'], content)
         fixed_title = item['title'].replace('&','&amp;')
         full_item = {
             'title': fixed_title,
