@@ -3,12 +3,16 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from extract_dates import analyse_text_for_earliest_and_last_date
 from tipp import description_escaped_html
+import html
 
 # URL of the website
 domain = 'https://www.corkcoco.ie'
 urls38 = 'https://www.corkcoco.ie/en/resident/planning-and-development/public-consultations/current-section-38s'
 urlp8 = 'https://www.corkcoco.ie/en/resident/planning-and-development/public-consultations/active-part-8-development-consultation'
 author = 'Cork County Council'
+#i have to use absolute paths on the server
+rss_path = '../rss/corkcounty.rss.xml'
+# rss_path = '/home/tbibbyie/projects.bibby.ie/consultations-scraper/rss/corkcounty.rss.xml'
 
 # Send a GET request
 responses38 = requests.get(urls38)
@@ -56,7 +60,11 @@ for item in items:
             'pubDate': earliest,
             'description': description_html
         }
+        unescaped_html = html.unescape(description_html)
+        print(unescaped_html)
+        print("-------------")
         full_items.append(full_item)
+
     else:
         # idk I guess skip it and print an error?
         print(f"**********DID NOT GET A HIT FOR {item['link']}*********")
@@ -95,5 +103,5 @@ def create_rss_feed(items):
 rss_feed = create_rss_feed(full_items)
 
 # Save to a file
-with open('../rss/corkcounty.rss.xml', 'w+') as file:
+with open(rss_path, 'w+') as file:
     file.write(rss_feed)

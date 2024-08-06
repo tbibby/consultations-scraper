@@ -5,6 +5,10 @@ import html
 from dateutil import parser
 import pytz
 
+rss_path = '../rss/tipperary.rss.xml'
+# rss_path = '/home/tbibbyie/projects.bibby.ie/consultations-scraper/rss/tipperary.rss.xml'
+
+
 def description_escaped_html(status, start_date, closing_date, title, description):
     attr_date_format = '%Y-%m-%dT%H:%M:%S%z'
     desc_date_format = '%-d.%m.%Y - %I:%M%P' #%P is undocumented and, confusingly, lowercase
@@ -107,5 +111,5 @@ def create_rss_feed(items):
 rss_feed = create_rss_feed(items)
 
 # Save to a file
-with open('../rss/tipperary.rss.xml', 'w+') as file:
+with open(rss_path, 'w+') as file:
     file.write(rss_feed)
