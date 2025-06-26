@@ -11,8 +11,7 @@ urls38 = 'https://www.corkcoco.ie/en/resident/planning-and-development/public-co
 urlp8 = 'https://www.corkcoco.ie/en/resident/planning-and-development/public-consultations/active-part-8-development-consultation'
 author = 'Cork County Council'
 #i have to use absolute paths on the server
-rss_path = '../rss/corkcounty.rss.xml'
-# rss_path = '/home/tbibbyie/projects.bibby.ie/consultations-scraper/rss/corkcounty.rss.xml'
+rss_path = '/var/www/projects2/consultations-scraper/rss/corkcounty.rss.xml'
 
 # Send a GET request
 responses38 = requests.get(urls38)

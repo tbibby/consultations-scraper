@@ -5,8 +5,7 @@ import html
 from dateutil import parser
 import pytz
 
-rss_path = '../rss/tipperary.rss.xml'
-# rss_path = '/home/tbibbyie/projects.bibby.ie/consultations-scraper/rss/tipperary.rss.xml'
+rss_path = '/var/www/projects2/consultations-scraper/rss/tipperary.rss.xml'
 
 
 def description_escaped_html(status, start_date, closing_date, title, description):
