@@ -39,7 +39,9 @@ No explicit Apache config — served via DocumentRoot fallback at `/consultation
 
 ## Status
 
-Dormant since March 2025 (~14 months). No active cron job. Feeds were last generated manually. The scraping approach was working at the time; council site structures may have changed.
+Dormant since March 2025. No active cron job. Feeds were last generated manually. The scraping approach was working at the time; council site structures may have changed.
+
+**2026-07-31**: `../part8` now exists as a more authoritative Part 8 scraper, pulling all 31 councils directly from the LGMA planning portal (`planning.localgov.ie`). This project's Part 8 coverage (Cork, Tipperary) is superseded by `../part8`. However, `../part8` does not cover **Section 38** consultations — this project's Cork County scraper is currently the only thing covering Section 38. Keeping this project around as dormant rather than retiring it, in case we want to reopen it to specifically cover Section 38 (dropping the now-redundant Part 8 scraping). Open tasks moved to notes in TASKS.md.
 
 ## Note on version control
 
@@ -51,4 +53,6 @@ This directory contains a nested `.git` repo (predates the monorepo). The `rss/`
 
 ## Getting Your Task
 
-Read `TASKS.md` and find the first task marked `[ ]`. Implement it, then confirm with the user before marking `[x]`. After marking done, commit and push. Do not include any references to Claude Code or AI in commit messages.
+This project is dormant — there are no active tasks. `TASKS.md` holds notes on
+previously open work, kept for reference if the project is reopened (see
+Status above). Don't act on them without checking with the user first.

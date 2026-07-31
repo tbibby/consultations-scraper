@@ -1,41 +1,32 @@
-# Consultations Scraper — Tasks
+# Consultations Scraper — Notes
 
-## How to use this file
-
-Read CONTEXT.md first, then work through tasks top-to-bottom.
-
----
-
-### 1. [ ] Revive: confirm cron status, test scripts, refresh feeds
-**Description**: The project has been dormant since March 2025. Steps:
-1. Check `crontab -l` for any existing entries — there probably are none
-2. Run `python scripts/corkcounty.py` and `python scripts/tipp.py` from the project root (or with a venv if dependencies are installed) — check for errors; council site structures may have changed
-3. If scripts run successfully, refresh both feeds and verify the RSS XML looks correct
-4. Add a cron entry to run both scrapers on a regular schedule (e.g. daily)
-5. Update CONTEXT.md to reflect active cron schedule
+This project is dormant (see CONTEXT.md). The items below were open tasks,
+kept here as notes in case the project is revived.
 
 ---
 
-### 2. [ ] Add pyproject.toml and standard venv
-**Description**: Dependencies (`requests`, `beautifulsoup4`, `python-dateutil`, `pytz`) are currently implicit — no `pyproject.toml` or `requirements.txt`. Add a `pyproject.toml` following the project standard so dependencies are explicit and reproducible. Use `uv` for venv management.
+### Revive: confirm cron status, test scripts, refresh feeds
+The project was dormant since March 2025. Reviving would mean: checking for
+existing cron entries (likely none), running `scripts/corkcounty.py` and
+`scripts/tipp.py` to check whether council site structures still match what
+the scrapers expect, refreshing both RSS feeds, and adding a cron schedule.
 
----
+### Add pyproject.toml and standard venv
+Dependencies (`requests`, `beautifulsoup4`, `python-dateutil`, `pytz`) are
+implicit — no `pyproject.toml` or `requirements.txt`. Should use `uv` for venv
+management if this project follows the current project standard.
 
-### 3. [ ] Apply routekit branding to index.html
-**Description**: `index.html` has no routekit branding. Apply:
-1. Add `<link rel="stylesheet" href="https://projects.bibby.ie/routekit/routekit.css">`
-2. Add `<script src="https://projects.bibby.ie/routekit/navbar.js"></script>`
-3. Wrap content in standard routekit page structure (`.page-header`, `.container`, `.card`)
+### Apply routekit branding to index.html
+`index.html` has no routekit branding. Would need the routekit stylesheet/navbar
+script and standard page structure (`.page-header`, `.container`, `.card`).
 
----
+### Expand to additional councils
+Candidates considered for public-transport-relevant planning notices: Dublin
+City Council, Dún Laoghaire–Rathdown, Fingal, South Dublin, Galway City,
+Limerick. Would need to evaluate whether each site is scrapeable (structured
+HTML vs. PDF-only).
 
-### 4. [ ] Expand to additional councils
-**Description**: Consider adding more councils where planning notices are relevant to public transport infrastructure. Candidates: Dublin City Council, Dún Laoghaire–Rathdown, Fingal, South Dublin, Galway City, Limerick. Evaluate whether council sites are scrapeable (structured HTML vs. PDF-only) before committing.
-
----
-
-### 5. [ ] Graduate to navbar (Data menu — Tools section)
-**Description**: Once branding is applied and feeds are active, add to the RouteKit ecosystem:
-1. Add `Consultations Scraper` to navbar Data → Tools section
-2. Add tool card to routekit landing page (Data section)
-3. Move from *Not yet integrated* to *Integrated* in `routekit/CONTEXT.md`
+### Graduate to navbar (Data menu — Tools section)
+Once branding is applied and feeds are active: add to navbar Data → Tools
+section, add a tool card to the routekit landing page, and move from *Not yet
+integrated* to *Integrated* in `routekit/CONTEXT.md`.
